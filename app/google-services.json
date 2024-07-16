@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "576742028234",
+    "project_id": "geoalert-ccc",
+    "storage_bucket": "geoalert-ccc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576742028234:android:63ae5348761ce5945dd533",
+        "android_client_info": {
+          "package_name": "com.casecode.geoalert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576742028234-il6rkbsapqjq1ulvpvt92scvj1n4v4ld.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.casecode.geoalert",
+            "certificate_hash": "f25b0fb6f5ff2583f987b7cf214745a4b6ff5951"
+          }
+        },
+        {
+          "client_id": "576742028234-bk0vk4fbutmcflq7sgbg1med3j7ndb5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfhQGh0vCjcfnS4CC35jgqVvANx8OIdBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576742028234-bk0vk4fbutmcflq7sgbg1med3j7ndb5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

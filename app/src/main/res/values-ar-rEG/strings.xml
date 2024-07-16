@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GeoAlert</string>
+    <string name="not_connected">⚠️ أنت غير متصل بالإنترنت</string>
+
+
+    <!-- sign in screen -->
+    <string name="welcome_to_geo_alert">مرحبًا بك في GeoAlert</string>
+    <string name="google_logo">شعار جوجل</string>
+    <string name="sign_in_with_google">تسجيل الدخول باستخدام جوجل</string>
+    <string name="address_concept">مفهوم العنوان</string>
+    <string name="geo_alert_description">حدد مناطق معينة على الخريطة وتلقي التنبيهات عند دخولك أو خروجك من تلك المناطق. ابقَ على اتصال بالأماكن التي تهمك مع GeoAlert</string>
+    <string name="version">الإصدار %1$s</string>
+    <string name="unknown">غير معروف</string>
+</resources>
