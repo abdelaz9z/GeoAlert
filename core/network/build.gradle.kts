@@ -62,6 +62,16 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.kotlin.serialization)
 
+    // =============================================================================================
+    // firebase
+    // =============================================================================================
+    implementation(libs.firebase.auth)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.firebase.auth)
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.performance)
+    // ==============================================
+
     testImplementation(libs.kotlinx.coroutines.test)
 }
 

@@ -4,8 +4,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ShortText
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Bookmarks
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Task
 import androidx.compose.material.icons.outlined.Upcoming
+import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.BookmarkBorder
@@ -14,9 +18,11 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.Grid3x3
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.Task
 import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material.icons.rounded.ViewDay
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -25,6 +31,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
  * GeoAlert icons. Material icons are [ImageVector]s, custom icons are drawable resource IDs.
  */
 object GeoAlertIcons {
+    val Home = Icons.Rounded.Home
+    val HomeBorder = Icons.Outlined.Home
+    val Task = Icons.Rounded.Task
+    val TaskBorder = Icons.Outlined.Task
+    val Account = Icons.Rounded.AccountCircle
+    val AccountBorder = Icons.Outlined.AccountCircle
+
+
     val Add = Icons.Rounded.Add
     val ArrowBack = Icons.AutoMirrored.Rounded.ArrowBack
     val Bookmark = Icons.Rounded.Bookmark

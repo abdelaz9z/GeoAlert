@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    api(libs.androidx.metrics)
 
     // --> Core Modules
     api(projects.core.designsystem)

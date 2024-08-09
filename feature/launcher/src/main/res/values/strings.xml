@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="web_client_id" translatable="false">576742028234-bk0vk4fbutmcflq7sgbg1med3j7ndb5i.apps.googleusercontent.com</string>
-
     <!-- splash screen -->
     <string name="logout_is_loading">Logout is Loading…</string>
 

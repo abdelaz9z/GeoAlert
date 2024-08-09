@@ -55,18 +55,20 @@ android {
 
 dependencies {
 
+    // --> Feature Modules
+    implementation(projects.feature.home)
+    implementation(projects.feature.reminders)
+    implementation(projects.feature.account)
+    implementation(projects.feature.launcher)
+    implementation(projects.feature.settings)
+//    implementation(projects.feature.search)
+
     // --> Core Modules
     implementation(projects.core.common)
     implementation(projects.core.ui)
     implementation(projects.core.designsystem)
     implementation(projects.core.data)
     implementation(projects.core.model)
-
-
-    implementation(projects.feature.settings)
-
-    // --> Feature Modules
-    implementation(projects.feature.launcher)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

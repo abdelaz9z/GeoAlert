@@ -2,19 +2,8 @@
     <string name="app_name">GeoAlert</string>
     <string name="not_connected">⚠️ You aren’t connected to the internet</string>
 
-
-    <string name="web_client_id" translatable="false">576742028234-bk0vk4fbutmcflq7sgbg1med3j7ndb5i.apps.googleusercontent.com</string>
-
-    <!-- sign in screen -->
-    <string name="welcome_to_geo_alert">Welcome to GeoAlert</string>
-    <string name="google_logo">Google Logo</string>
-    <string name="sign_in_with_google">Sign in with Google</string>
-    <string name="address_concept">Address concept</string>
-    <string name="geo_alert_description">Set specific areas on a map and receive alerts when you enter or exit those zones. Stay connected to the places that matter with GeoAlert</string>
-    <string name="version">Version %1$s</string>
-    <string name="unknown">Unknown</string>
-    <string name="feature_foryou_title">For you</string>
-    <string name="feature_bookmarks_title">Saved</string>
-    <string name="feature_search_interests">Interests</string>
+    <string name="feature_home_title">Home</string>
+    <string name="feature_reminders_title">Reminders</string>
+    <string name="feature_account_title">Account</string>
     <string name="title_activity_main">MainActivity</string>
 </resources>

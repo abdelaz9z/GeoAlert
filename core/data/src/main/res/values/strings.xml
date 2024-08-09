@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in_success">Sign in success</string>
+    <string name="sign_in_failure">Sign_in failure</string>
+    <string name="sign_in_exception">Sign in exception</string>
+    <string name="unsupported_api_call">Unsupported api call</string>
+    <string name="sign_in_api_exception">Sign in api exception</string>
+</resources>

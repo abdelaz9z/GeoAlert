@@ -134,7 +134,7 @@ annotation class ThemePreviews
 @ThemePreviews
 @Composable
 fun BackgroundDefault() {
-    GeoAlertTheme(disableDynamicTheming = true) {
+    GeoAlertTheme(dynamicColor = true) {
         GeoAlertBackground(Modifier.size(100.dp), content = {})
     }
 }
@@ -142,7 +142,7 @@ fun BackgroundDefault() {
 @ThemePreviews
 @Composable
 fun BackgroundDynamic() {
-    GeoAlertTheme(disableDynamicTheming = false) {
+    GeoAlertTheme(dynamicColor = false) {
         GeoAlertBackground(Modifier.size(100.dp), content = {})
     }
 }
@@ -158,7 +158,7 @@ fun BackgroundAndroid() {
 @ThemePreviews
 @Composable
 fun GradientBackgroundDefault() {
-    GeoAlertTheme(disableDynamicTheming = true) {
+    GeoAlertTheme(dynamicColor = true) {
         GeoAlertGradientBackground(Modifier.size(100.dp), content = {})
     }
 }
@@ -166,7 +166,7 @@ fun GradientBackgroundDefault() {
 @ThemePreviews
 @Composable
 fun GradientBackgroundDynamic() {
-    GeoAlertTheme(disableDynamicTheming = false) {
+    GeoAlertTheme(dynamicColor = false) {
         GeoAlertGradientBackground(Modifier.size(100.dp), content = {})
     }
 }

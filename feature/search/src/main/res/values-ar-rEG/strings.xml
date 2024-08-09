@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_search_title">البحث</string>
+    <string name="feature_search_clear_search_text_content_desc">مسح نص البحث</string>
+    <string name="feature_search_result_not_found">عذرًا، لم يتم العثور على محتوى لبحثك \"%1$s\"</string>
+    <string name="feature_search_not_ready">عذرًا، نحن لا زلنا نقوم بمعالجة فهرس البحث. يرجى العودة لاحقًا</string>
+    <string name="feature_search_try_another_search">جرّب بحثًا آخر أو استكشاف</string>
+    <string name="feature_search_interests">الاهتمامات</string>
+    <string name="feature_search_to_browse_topics"> لاستعراض المواضيع</string>
+    <string name="feature_search_topics">المواضيع</string>
+    <string name="feature_search_updates">التحديثات</string>
+    <string name="feature_search_recent_searches">البحوث الأخيرة</string>
+    <string name="feature_search_clear_recent_searches_content_desc">مسح البحوث</string>
+</resources>

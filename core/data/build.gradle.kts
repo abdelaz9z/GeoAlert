@@ -48,6 +48,25 @@ dependencies {
     // kotlinx
     implementation(libs.androidx.tracing.ktx)
 
+    // =============================================================================================
+    // firebase
+    // =============================================================================================
+    implementation(libs.firebase.auth)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.firebase.auth)
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.performance)
+    implementation (libs.firebase.database.ktx)
+    // ==============================================
+
+    // =============================================================================================
+    // credentials
+    // =============================================================================================
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    // ==============================================
+
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.kotlinx.serialization.json)
     testImplementation(projects.core.testing)

@@ -2,7 +2,6 @@ package com.casecode.feature.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.casecode.core.data.repository.UserDataRepository
 import com.casecode.core.model.data.DarkThemeConfig
 import com.casecode.core.model.data.ThemeBrand
 import com.casecode.feature.settings.SettingsUiState.Loading

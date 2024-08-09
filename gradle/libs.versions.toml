@@ -3,6 +3,7 @@ agp = "8.5.1"
 coilComposeVersion = "2.6.0"
 credentials = "1.2.2"
 firebaseBom = "33.1.2"
+firebaseDatabaseKtx = "21.0.0"
 googleid = "1.1.1"
 hiltAndroidCompiler = "2.51.1"
 hiltAndroidVersion = "2.51.1"
@@ -57,6 +58,12 @@ androidxEspresso = "3.5.1"
 androidxNavigation = "2.8.0-alpha06"
 googleOss = "17.0.1"
 timber = "5.0.1"
+androidxMetrics = "1.0.0-alpha04"
+runtimeLivedata = "1.6.8"
+
+[bundles]
+androidx-compose-ui-test = ["androidx-compose-ui-test", "androidx-compose-ui-testManifest"]
+unitTesting = ["junit", "kotlin-test", "mockito-core", "mockito-kotlin", "kotlinx-coroutines-test"]
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -69,6 +76,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomRuntime" }
 coil-compose-v260 = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 google-firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-performance = { group = "com.google.firebase", name = "firebase-perf-ktx" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -142,12 +150,11 @@ androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", nam
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
+androidx-metrics = { group = "androidx.metrics", name = "metrics-performance", version.ref = "androidxMetrics" }
 
 # Debug Tools
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
-
-[bundles]
-unitTesting = ["junit", "kotlin-test", "mockito-core", "mockito-kotlin", "kotlinx-coroutines-test"]
+androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

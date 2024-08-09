@@ -8,13 +8,10 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -256,32 +253,11 @@ val unspecified_scheme = ColorFamily(
     Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
 
-/**
- * Light Android gradient colors
- */
-val LightAndroidGradientColors = GradientColors(container = DarkGreenGray95)
-
-/**
- * Dark Android gradient colors
- */
-val DarkAndroidGradientColors = GradientColors(container = Color.Black)
-
-/**
- * Light Android background theme
- */
-val LightAndroidBackgroundTheme = BackgroundTheme(color = DarkGreenGray95)
-
-/**
- * Dark Android background theme
- */
-val DarkAndroidBackgroundTheme = BackgroundTheme(color = Color.Black)
-
 @Composable
 fun GeoAlertTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    disableDynamicTheming: Boolean = true,
     content: @Composable() () -> Unit
 ) {
     val colorScheme = when {
@@ -294,45 +270,11 @@ fun GeoAlertTheme(
         else -> lightScheme
     }
 
-    // Gradient colors
-    val emptyGradientColors = GradientColors(container = colorScheme.surfaceColorAtElevation(2.dp))
-    val defaultGradientColors = GradientColors(
-        top = colorScheme.inverseOnSurface,
-        bottom = colorScheme.primaryContainer,
-        container = colorScheme.surface,
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = AppTypography,
+        content = content
     )
-    val gradientColors = when {
-        dynamicColor -> if (darkTheme) DarkAndroidGradientColors else LightAndroidGradientColors
-        !disableDynamicTheming && supportsDynamicTheming() -> emptyGradientColors
-        else -> defaultGradientColors
-    }
-    // Background theme
-    val defaultBackgroundTheme = BackgroundTheme(
-        color = colorScheme.surface,
-        tonalElevation = 2.dp,
-    )
-    val backgroundTheme = when {
-        dynamicColor -> if (darkTheme) DarkAndroidBackgroundTheme else LightAndroidBackgroundTheme
-        else -> defaultBackgroundTheme
-    }
-    val tintTheme = when {
-        dynamicColor -> TintTheme()
-        !disableDynamicTheming && supportsDynamicTheming() -> TintTheme(colorScheme.primary)
-        else -> TintTheme()
-    }
-
-    // Composition locals
-    CompositionLocalProvider(
-        LocalGradientColors provides gradientColors,
-        LocalBackgroundTheme provides backgroundTheme,
-        LocalTintTheme provides tintTheme,
-    ) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            typography = AppTypography,
-            content = content
-        )
-    }
 }
 
 @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)

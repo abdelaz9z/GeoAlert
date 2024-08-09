@@ -6,6 +6,8 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.util.DebugLogger
 import com.casecode.core.network.BuildConfig
+import com.casecode.core.network.GeoAlertNetworkDataSource
+import com.casecode.core.network.retrofit.RetrofitGeoAlertNetwork
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,6 +42,15 @@ internal object NetworkModule {
                     },
             )
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGeoAlertNetworkDataSource(
+        json: Json,
+        callFactory: dagger.Lazy<Call.Factory>
+    ): GeoAlertNetworkDataSource {
+        return RetrofitGeoAlertNetwork(json, callFactory)
     }
 
     /**

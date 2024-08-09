@@ -38,7 +38,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.casecode.core.designsystem.component.GeoAlertTextButton
 import com.casecode.core.designsystem.theme.GeoAlertTheme
 import com.casecode.core.designsystem.theme.supportsDynamicTheming
