@@ -33,19 +33,19 @@ import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
 class AppLauncherRepositoryImp @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val googleIdOption: GetGoogleIdOption,
+    private val googleAuthRepository: GoogleAuthRepository,
     private val firebaseAuth: FirebaseAuth,
+    private val credentialManager: CredentialManager,
     @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher,
 ) : AppLauncherRepository {
     private val TAG = "AccountServiceImpl"
-    private val credentialManager: CredentialManager = CredentialManager.create(context)
+
     override suspend fun signIn(): Resource<Int> {
         trace(SIGN_IN) {
             return withContext(ioDispatcher) {
                 try {
-                    val googleIdToken = retrieveGoogleIdToken()
-                    val googleCredentials = buildGoogleAuthCredential(googleIdToken)
+                    val googleIdToken = googleAuthRepository.retrieveGoogleIdToken()
+                    val googleCredentials = googleAuthRepository.buildGoogleAuthCredential(googleIdToken)
                     val authResult = signInWithGoogleCredentials(googleCredentials)
 
                     if (authResult.user != null) {
@@ -70,20 +70,6 @@ class AppLauncherRepositoryImp @Inject constructor(
                 }
             }
         }
-    }
-
-    private suspend fun retrieveGoogleIdToken(): String {
-        val credentialRequest =
-            GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build()
-        val credential =
-            credentialManager.getCredential(request = credentialRequest, context = context)
-        val googleIdTokenCredentialRequest =
-            GoogleIdTokenCredential.createFrom(credential.credential.data)
-        return googleIdTokenCredentialRequest.idToken
-    }
-
-    private fun buildGoogleAuthCredential(googleIdToken: String): AuthCredential {
-        return GoogleAuthProvider.getCredential(googleIdToken, null)
     }
 
     private suspend fun signInWithGoogleCredentials(credentials: AuthCredential): AuthResult {
@@ -131,7 +117,7 @@ class AppLauncherRepositoryImp @Inject constructor(
         trace(SIGN_OUT) {
             try {
                 emit(Result.Loading)
-                credentialManager.clearCredentialState(ClearCredentialStateRequest())
+                credentialManager.clearCredentialState(ClearCredentialStateRequest()) // Now it's accessible
                 firebaseAuth.signOut()
                 delay(200L)
 
