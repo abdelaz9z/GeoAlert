@@ -7,7 +7,7 @@ import com.casecode.core.common.result.Result
 
 interface AppLauncherRepository {
 
-    suspend fun signIn(activity: Activity): Resource<Int>
+    suspend fun signIn(): Resource<Int>
 
     suspend fun checkRegistration(email: String): Resource<Boolean>
 

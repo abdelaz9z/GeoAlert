@@ -9,7 +9,7 @@ import javax.inject.Inject
 class SignInUseCase @Inject constructor(
     private val appLauncherRepository: AppLauncherRepository
 ) {
-    suspend operator fun invoke(activity: Activity) = appLauncherRepository.signIn(activity)
+    suspend operator fun invoke() = appLauncherRepository.signIn()
 }
 
 class CheckRegistrationUseCase @Inject constructor(

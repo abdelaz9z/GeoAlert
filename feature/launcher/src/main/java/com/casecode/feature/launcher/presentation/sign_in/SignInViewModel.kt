@@ -19,9 +19,9 @@ class SignInViewModel @Inject constructor(
     private val _signInResult = MutableStateFlow<Resource<Int>>(Resource.Loading)
     val signInResult: StateFlow<Resource<Int>> = _signInResult
 
-    fun signInWithGoogle(activity: Activity) {
+    fun signInWithGoogle() {
         viewModelScope.launch {
-            _signInResult.value = signInUseCase(activity)
+            _signInResult.value = signInUseCase()
         }
     }
 }

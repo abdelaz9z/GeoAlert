@@ -40,11 +40,11 @@ class AppLauncherRepositoryImp @Inject constructor(
 ) : AppLauncherRepository {
     private val TAG = "AccountServiceImpl"
     private val credentialManager: CredentialManager = CredentialManager.create(context)
-    override suspend fun signIn(activity: Activity): Resource<Int> {
+    override suspend fun signIn(): Resource<Int> {
         trace(SIGN_IN) {
             return withContext(ioDispatcher) {
                 try {
-                    val googleIdToken = retrieveGoogleIdToken(activity)
+                    val googleIdToken = retrieveGoogleIdToken()
                     val googleCredentials = buildGoogleAuthCredential(googleIdToken)
                     val authResult = signInWithGoogleCredentials(googleCredentials)
 
@@ -72,11 +72,11 @@ class AppLauncherRepositoryImp @Inject constructor(
         }
     }
 
-    private suspend fun retrieveGoogleIdToken(activity: Activity): String {
+    private suspend fun retrieveGoogleIdToken(): String {
         val credentialRequest =
             GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build()
         val credential =
-            credentialManager.getCredential(request = credentialRequest, context = activity)
+            credentialManager.getCredential(request = credentialRequest, context = context)
         val googleIdTokenCredentialRequest =
             GoogleIdTokenCredential.createFrom(credential.credential.data)
         return googleIdTokenCredentialRequest.idToken

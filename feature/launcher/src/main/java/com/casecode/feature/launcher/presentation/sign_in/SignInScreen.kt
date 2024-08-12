@@ -52,7 +52,7 @@ internal fun SignInRoute(
         onSignInFailure = onSignInFailure,
         signInResult = signInResult,
         signInWithGoogle = {
-            viewModel.signInWithGoogle(activity)
+            viewModel.signInWithGoogle()
         },
         versionName = versionName,
         modifier = modifier,
