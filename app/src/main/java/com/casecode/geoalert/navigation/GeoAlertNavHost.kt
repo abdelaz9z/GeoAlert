@@ -31,6 +31,6 @@ fun GeoAlertNavHost(
     ) {
         homeScreen(onTopicClick = { /* handle home topic click */ })
         remindersScreen(onTopicClick = { /* handle tasks topic click */ })
-        accountScreen(onTopicClick = { /* handle account topic click */ })
+        accountScreen()
     }
 }

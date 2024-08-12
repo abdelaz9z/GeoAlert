@@ -9,6 +9,7 @@ import androidx.credentials.exceptions.GetCredentialException
 import com.casecode.core.common.network.Dispatcher
 import com.casecode.core.common.network.GeoAlertDispatchersDispatchers.IO
 import com.casecode.core.common.result.Resource
+import com.casecode.core.common.result.Result
 import com.casecode.core.data.R
 import com.google.android.gms.common.api.UnsupportedApiCallException
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
@@ -23,6 +24,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -124,22 +127,25 @@ class AppLauncherRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun signOut() {
+    override suspend fun signOut(): Flow<Result<Unit>> = flow {
         trace(SIGN_OUT) {
             try {
+                emit(Result.Loading)
                 credentialManager.clearCredentialState(ClearCredentialStateRequest())
                 firebaseAuth.signOut()
                 delay(200L)
 
+                emit(Result.Success(Unit))
                 Timber.tag(TAG).e("SignOut Done id = %s", firebaseAuth.currentUser?.uid)
             } catch (e: Exception) {
                 Timber.tag(TAG).e("SignOut exception: $e")
-                e.printStackTrace()
                 if (e is CancellationException) {
                     Timber.tag(TAG).e("SignOut Cancellation: $e")
                     throw e
+                    emit(Result.Error(e))
                 } else {
                     Timber.tag(TAG).e("SignOut exception: $e")
+                    emit(Result.Error(e))
                 }
             }
         }

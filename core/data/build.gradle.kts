@@ -52,11 +52,13 @@ dependencies {
     // firebase
     // =============================================================================================
     implementation(libs.firebase.auth)
+    api(libs.firebase.auth.ktx)
     implementation(platform(libs.firebase.bom))
     implementation(libs.google.firebase.auth)
     implementation(libs.play.services.auth)
     implementation(libs.firebase.performance)
-    implementation (libs.firebase.database.ktx)
+    api (libs.firebase.database.ktx)
+    api (libs.kotlinx.coroutines.play.services)
     // ==============================================
 
     // =============================================================================================

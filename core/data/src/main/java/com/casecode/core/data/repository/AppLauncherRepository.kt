@@ -2,6 +2,8 @@ package com.casecode.core.data.repository
 
 import android.app.Activity
 import com.casecode.core.common.result.Resource
+import kotlinx.coroutines.flow.Flow
+import com.casecode.core.common.result.Result
 
 interface AppLauncherRepository {
 
@@ -11,6 +13,6 @@ interface AppLauncherRepository {
 
     suspend fun isSignIn(): Resource<Boolean>
 
-    suspend fun signOut()
+    suspend fun signOut(): Flow<Result<Unit>>
 
 }

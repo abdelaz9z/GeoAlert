@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account">الحساب</string>
+    <string name="sign_out">تسجيل الخروج</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="profile_picture">صورة الملف الشخصي</string>
+</resources>

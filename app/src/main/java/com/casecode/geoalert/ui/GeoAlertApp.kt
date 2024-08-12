@@ -57,7 +57,6 @@ import com.casecode.geoalert.navigation.GeoAlertNavHost
 import com.casecode.geoalert.navigation.TopLevelDestination
 import com.casecode.feature.settings.R as settingsR
 
-@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun GeoAlertApp(
     appState: GeoAlertAppState,
@@ -106,8 +105,7 @@ fun GeoAlertApp(
 @Composable
 @OptIn(
     ExperimentalMaterial3Api::class,
-    ExperimentalComposeUiApi::class,
-    ExperimentalMaterial3AdaptiveApi::class,
+    ExperimentalComposeUiApi::class
 )
 internal fun GeoAlertApp(
     appState: GeoAlertAppState,
@@ -163,8 +161,6 @@ internal fun GeoAlertApp(
             modifier = modifier.semantics {
                 testTagsAsResourceId = true
             },
-            containerColor = Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.onBackground,
             contentWindowInsets = WindowInsets(0, 0, 0, 0),
             snackbarHost = { SnackbarHost(snackbarHostState) },
         ) { padding ->
@@ -181,8 +177,8 @@ internal fun GeoAlertApp(
             ) {
                 // Show the top app bar on top level destinations.
                 val destination = appState.currentTopLevelDestination
-                val shouldShowTopAppBar = destination != null
-                if (destination != null) {
+                val shouldShowTopAppBar = destination != TopLevelDestination.ACCOUNT
+                if (destination != null && shouldShowTopAppBar) {
                     GeoAlertTopAppBar(
                         titleRes = destination.titleTextId,
                         navigationIcon = GeoAlertIcons.Search,

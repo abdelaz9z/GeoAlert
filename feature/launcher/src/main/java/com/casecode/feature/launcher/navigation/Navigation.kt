@@ -41,6 +41,9 @@ fun AppLauncherNavigation() {
     }
 
     if (showErrorDialog.isNotEmpty()) {
-        ErrorDialog(error = showErrorDialog, onDismissClick = { showErrorDialog = "" })
+        ErrorDialog(
+            message = showErrorDialog,
+            onDismissRequest = { showErrorDialog = "" },
+            onConfirm = { showErrorDialog = "" })
     }
 }

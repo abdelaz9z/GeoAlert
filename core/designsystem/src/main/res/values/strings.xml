@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="close">Close</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="are_you_sure_you_want_to_delete_your_this_action_cannot_be_undone">Are you sure you want to delete your %1$s? This action cannot be undone.</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>"
 </resources>

@@ -1,5 +1,7 @@
 package com.casecode.core.data.model
 
+import com.google.firebase.auth.FirebaseUser
+
 data class User(
     val alerts: List<Alert> = emptyList(),
     val email: String = "",
@@ -71,4 +73,14 @@ data class Action(
     val type: String = ""
 ) {
     constructor() : this(icon = "", location = Location(), type = "")
+}
+
+fun FirebaseUser.toUser(): User {
+    return User(
+        email = this.email.orEmpty(),
+        id = this.uid,
+        name = this.displayName.orEmpty(),
+        photo = this.photoUrl?.toString().orEmpty()
+        // You can add other fields or default values as needed
+    )
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">إغلاق</string>
+    <string name="delete">حذف</string>
+    <string name="cancel">إلغاء</string>
+    <string name="confirm_deletion">تأكيد الحذف</string>
+    <string name="are_you_sure_you_want_to_delete_your_this_action_cannot_be_undone">هل أنت متأكد أنك تريد حذف %1$s؟ لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="unknown_error">خطأ غير معروف</string>
+    <string name="ok">موافق</string>
+    <string name="error">خطأ</string>
+</resources>

@@ -45,6 +45,7 @@ dependencies {
     api(libs.androidx.compose.ui.util)
     api(libs.androidx.ui.text.google.fonts)
     api(libs.androidx.compose.ui.tooling.preview)
+    api (libs.androidx.compose.ui.tooling)
 
     implementation(libs.coil.kt.compose)
 

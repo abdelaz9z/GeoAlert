@@ -11,7 +11,8 @@ class AddUserUseCase @Inject constructor(private val userRepository: UserReposit
 }
 
 class DeleteUserUseCase @Inject constructor(private val userRepository: UserRepository) {
-    operator fun invoke(userId: String): Flow<Result<Unit>> = userRepository.deleteUser(userId)
+    suspend fun deleteUserFromDatabase() = userRepository.deleteUserFromDatabase()
+    suspend fun deleteUserFromAuth() = userRepository.deleteUserFromAuth()
 }
 
 class UpdateUserUseCase @Inject constructor(private val userRepository: UserRepository) {

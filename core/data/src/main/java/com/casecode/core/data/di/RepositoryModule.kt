@@ -7,12 +7,13 @@ import com.casecode.core.data.repository.AlertRepository
 import com.casecode.core.data.repository.AlertRepositoryImpl
 import com.casecode.core.data.repository.AppLauncherRepository
 import com.casecode.core.data.repository.AppLauncherRepositoryImp
+import com.casecode.core.data.repository.AuthService
+import com.casecode.core.data.repository.AuthServiceImpl
 import com.casecode.core.data.repository.UserRepository
 import com.casecode.core.data.repository.UserRepositoryImpl
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,8 +39,11 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(usersRef: DatabaseReference): UserRepository {
-        return UserRepositoryImpl(usersRef)
+    fun provideUserRepository(
+        usersRef: DatabaseReference,
+        firebaseAuth: FirebaseAuth
+    ): UserRepository {
+        return UserRepositoryImpl(usersRef, firebaseAuth)
     }
 
     @Provides
@@ -48,6 +52,14 @@ object RepositoryModule {
         usersRef: DatabaseReference
     ): AlertRepository {
         return AlertRepositoryImpl(usersRef)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthService(
+        auth: FirebaseAuth
+    ): AuthService {
+        return AuthServiceImpl(auth)
     }
 
 }
