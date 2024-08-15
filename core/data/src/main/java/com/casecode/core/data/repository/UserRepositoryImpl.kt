@@ -12,8 +12,7 @@ import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
     private val usersRef: DatabaseReference,
-    private val firebaseAuth: FirebaseAuth,
-    private val googleAuthRepository: GoogleAuthRepository
+    private val firebaseAuth: FirebaseAuth
 ) : UserRepository {
 
     override fun addUser(user: User): Flow<Result<Unit>> = flow {
@@ -46,27 +45,6 @@ class UserRepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 emit(Result.Error(Throwable("Error deleting user from database: ${e.message}")))
-            }
-        } else {
-            emit(Result.Error(Throwable("No user is signed in")))
-        }
-    }
-
-    override suspend fun deleteUserFromAuth(): Flow<Result<Unit>> = flow {
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null) {
-            try {
-                val googleIdToken = googleAuthRepository.retrieveGoogleIdToken()
-                val credentials = googleAuthRepository.buildGoogleAuthCredential(googleIdToken)
-
-                // Re-authenticate
-                currentUser.reauthenticate(credentials).await()
-
-                // Delete the user after Re-authentication
-                currentUser.delete().await()
-                emit(Result.Success(Unit))
-            } catch (e: Exception) {
-                emit(Result.Error(Throwable("Error deleting user from Firebase Authentication: ${e.message}")))
             }
         } else {
             emit(Result.Error(Throwable("No user is signed in")))

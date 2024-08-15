@@ -1,5 +1,6 @@
 package com.casecode.feature.account
 
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -49,6 +50,9 @@ import com.casecode.core.designsystem.R as designSystemR
 
 @Composable
 internal fun AccountRoute(viewModel: AccountViewModel = hiltViewModel()) {
+    val activity: Activity = LocalContext.current as? Activity
+        ?: throw IllegalStateException("Context is not an Activity")
+
     val context = LocalContext.current
     val currentUser by viewModel.currentUser.collectAsState()
     val signOutResult by viewModel.signOutResult.collectAsState()
@@ -84,7 +88,7 @@ internal fun AccountRoute(viewModel: AccountViewModel = hiltViewModel()) {
         ConfirmationDialog(
             name = stringResource(id = R.string.account),
             onConfirm = {
-                viewModel.deleteUser()
+                viewModel.deleteUser(activity)
                 showConfirmDialog = false
             },
             onDismiss = {

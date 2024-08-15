@@ -3,15 +3,11 @@ package com.casecode.core.data.di
 import android.content.Context
 import androidx.credentials.CredentialManager
 import com.casecode.core.common.network.Dispatcher
-import com.casecode.core.common.network.GeoAlertDispatchersDispatchers
+import com.casecode.core.common.network.GeoAlertDispatchersDispatchers.IO
 import com.casecode.core.data.repository.AlertRepository
 import com.casecode.core.data.repository.AlertRepositoryImpl
-import com.casecode.core.data.repository.AppLauncherRepository
-import com.casecode.core.data.repository.AppLauncherRepositoryImp
 import com.casecode.core.data.repository.AuthService
 import com.casecode.core.data.repository.AuthServiceImpl
-import com.casecode.core.data.repository.GoogleAuthRepository
-import com.casecode.core.data.repository.GoogleAuthRepositoryImpl
 import com.casecode.core.data.repository.UserRepository
 import com.casecode.core.data.repository.UserRepositoryImpl
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
@@ -25,35 +21,17 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideAppLauncherRepository(
-        googleAuthRepository: GoogleAuthRepository,
-        firebaseAuth: FirebaseAuth,
-        credentialManager: CredentialManager,
-        @Dispatcher(GeoAlertDispatchersDispatchers.IO) ioDispatcher: CoroutineDispatcher,
-    ): AppLauncherRepository {
-        return AppLauncherRepositoryImp(
-            googleAuthRepository,
-            firebaseAuth,
-            credentialManager,
-            ioDispatcher
-        )
-    }
-
-    @Provides
-    @Singleton
     fun provideUserRepository(
         usersRef: DatabaseReference,
         firebaseAuth: FirebaseAuth,
-        googleAuthRepository: GoogleAuthRepository,
     ): UserRepository {
-        return UserRepositoryImpl(usersRef, firebaseAuth, googleAuthRepository)
+        return UserRepositoryImpl(usersRef, firebaseAuth)
     }
 
     @Provides
@@ -67,18 +45,17 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideAuthService(
-        auth: FirebaseAuth
-    ): AuthService {
-        return AuthServiceImpl(auth)
-    }
-
-    @Singleton
-    @Provides
-    fun provideGoogleAuthRepository(
         @ApplicationContext context: Context,
-        googleIdOption: GetGoogleIdOption
-    ): GoogleAuthRepository {
-        return GoogleAuthRepositoryImpl(context, googleIdOption)
+        firebaseAuth: FirebaseAuth,
+        googleIdOption: GetGoogleIdOption,
+        @Dispatcher(IO) ioDispatcher: CoroutineDispatcher,
+    ): AuthService {
+        return AuthServiceImpl(
+            context,
+            firebaseAuth,
+            googleIdOption,
+            ioDispatcher
+        )
     }
 
     @Singleton

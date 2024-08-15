@@ -1,8 +1,10 @@
 package com.casecode.feature.account
 
+import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.casecode.core.common.result.Result
+import com.casecode.core.domain.DeleteUserFromAuthUseCase
 import com.casecode.core.domain.DeleteUserUseCase
 import com.casecode.core.domain.GetCurrentUserUseCase
 import com.casecode.core.domain.SignOutUseCase
@@ -20,7 +22,8 @@ import javax.inject.Inject
 class AccountViewModel @Inject constructor(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val deleteUserUseCase: DeleteUserUseCase,
-    private val signOutUseCase: SignOutUseCase
+    private val signOutUseCase: SignOutUseCase,
+    private val deleteUserFromAuthUseCase: DeleteUserFromAuthUseCase
 ) : ViewModel() {
 
     private val _currentUser = MutableStateFlow<FirebaseUser?>(null)
@@ -44,17 +47,17 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun deleteUser() {
+    fun deleteUser(activity: Activity) {
         viewModelScope.launch {
             deleteUserUseCase.deleteUserFromDatabase().collect { databaseResult ->
-                handleDeleteResult(databaseResult)
+                handleDeleteResult(databaseResult, activity)
             }
         }
     }
 
-    private suspend fun handleDeleteResult(databaseResult: Result<Unit>) {
+    private suspend fun handleDeleteResult(databaseResult: Result<Unit>, activity: Activity) {
         if (databaseResult is Result.Success) {
-            deleteUserUseCase.deleteUserFromAuth().collect { authResult ->
+            deleteUserFromAuthUseCase(activity).collect { authResult ->
                 _deleteUserResult.value = authResult
             }
         } else {

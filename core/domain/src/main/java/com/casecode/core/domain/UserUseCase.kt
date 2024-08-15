@@ -1,5 +1,6 @@
 package com.casecode.core.domain
 
+import android.app.Activity
 import com.casecode.core.common.result.Result
 import com.casecode.core.data.model.User
 import com.casecode.core.data.repository.UserRepository
@@ -12,7 +13,6 @@ class AddUserUseCase @Inject constructor(private val userRepository: UserReposit
 
 class DeleteUserUseCase @Inject constructor(private val userRepository: UserRepository) {
     suspend fun deleteUserFromDatabase() = userRepository.deleteUserFromDatabase()
-    suspend fun deleteUserFromAuth() = userRepository.deleteUserFromAuth()
 }
 
 class UpdateUserUseCase @Inject constructor(private val userRepository: UserRepository) {
