@@ -36,9 +36,8 @@ import com.casecode.feature.launcher.R
 
 @Composable
 internal fun SignInRoute(
-    onSignInSuccess: (String) -> Unit,
+    onSignInSuccess: () -> Unit,
     onSignInFailure: (String) -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: SignInViewModel = hiltViewModel(),
 ) {
     val activity: Activity = LocalContext.current as? Activity
@@ -47,40 +46,17 @@ internal fun SignInRoute(
 
     val signInResult by viewModel.signInResult.collectAsState()
 
-    SignInScreen(
-        onSignInSuccess = onSignInSuccess,
-        onSignInFailure = onSignInFailure,
-        signInResult = signInResult,
-        signInWithGoogle = {
-            viewModel.signInWithGoogle(activity)
-        },
-        versionName = versionName,
-        modifier = modifier,
-    )
-}
-
-@Composable
-fun SignInScreen(
-    onSignInSuccess: (String) -> Unit,
-    onSignInFailure: (String) -> Unit,
-    signInResult: Resource<Int>? = null,
-    signInWithGoogle: (Activity) -> Unit = {},
-    activity: Activity = LocalContext.current as? Activity
-        ?: throw IllegalStateException("Context is not an Activity"),
-    versionName: String = "",
-    modifier: Modifier = Modifier,
-) {
     LaunchedEffect(key1 = signInResult) {
         when (signInResult) {
             is Resource.Success -> {
                 // Handle success and navigate to MainActivity
-                onSignInSuccess(ClassNames.MAIN_ACTIVITY.className)
+                onSignInSuccess()
             }
 
             is Resource.Error -> {
                 // Handle error
                 onSignInFailure(
-                    (signInResult.message ?: "Unknown error").toString()
+                    ((signInResult as Resource.Error).message ?: "Unknown error").toString()
                 )
             }
 
@@ -88,6 +64,19 @@ fun SignInScreen(
         }
     }
 
+    SignInScreen(
+        signInWithGoogle = {
+            viewModel.signInWithGoogle(activity)
+        },
+        versionName = versionName
+    )
+}
+
+@Composable
+fun SignInScreen(
+    signInWithGoogle: () -> Unit = {},
+    versionName: String = "",
+) {
     // Implement your sign-in screen UI here
     Column(
         modifier = Modifier
@@ -115,7 +104,7 @@ fun SignInScreen(
         )
         Spacer(modifier = Modifier.height(50.dp))
         FilledTonalButton(
-            onClick = { signInWithGoogle(activity) },
+            onClick = { signInWithGoogle() },
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -152,14 +141,6 @@ fun getVersionName(context: Context): String {
 @Composable
 fun SignInScreenPreview() {
     GeoAlertTheme {
-        val signInViewModel: SignInViewModel = hiltViewModel()
-//        SignInScreen(signInViewModel = signInViewModel, {}, {})
+        SignInScreen()
     }
-}
-
-enum class ClassNames(val className: String) {
-    APP_LAUNCHER_ACTIVITY("com.casecode.feature.launcher.presentation.AppLauncherActivity"),
-
-    //    MAIN_ACTIVITY("com.casecode.feature.main.presentation.MainActivity"),
-    MAIN_ACTIVITY("com.casecode.geoalert.ui.MainActivity"),
 }

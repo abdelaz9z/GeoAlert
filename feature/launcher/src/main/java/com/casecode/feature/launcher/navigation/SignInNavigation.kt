@@ -11,7 +11,7 @@ const val SIGN_IN_ROUTE = "sign_in_route"
 fun NavController.navigateToSignIn(navOptions: NavOptions) = navigate(SIGN_IN_ROUTE, navOptions)
 
 fun NavGraphBuilder.signInScreen(
-    onSignInSuccess: (String) -> Unit,
+    onSignInSuccess: () -> Unit,
     onSignInFailure: (String) -> Unit,
 ) {
     composable(route = SIGN_IN_ROUTE) {

@@ -1,7 +1,6 @@
 package com.casecode.feature.launcher.presentation.splash
 
 import android.content.Context
-import android.content.Intent
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
@@ -38,9 +37,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.casecode.core.common.result.Resource
+import com.casecode.core.common.utils.moveToMainActivity
 import com.casecode.feature.launcher.R
 import com.casecode.feature.launcher.navigation.SIGN_IN_ROUTE
-import com.casecode.feature.launcher.presentation.sign_in.ClassNames
 import kotlinx.coroutines.delay
 
 @Composable
@@ -102,11 +101,7 @@ fun SplashScreenEffect(
         when (signInStatus) {
             is Resource.Success -> {
                 if (signInStatus.data) {
-                    val intent = Intent(
-                        context,
-                        Class.forName(ClassNames.MAIN_ACTIVITY.className)
-                    )
-                    context.startActivity(intent)
+                    moveToMainActivity(context)
                 } else {
                     onMoveActionRoute(SIGN_IN_ROUTE)
                 }

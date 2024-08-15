@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.casecode.core.common.utils.moveToMainActivity
 import com.casecode.core.designsystem.component.dialog.ErrorDialog
 
 @Composable
@@ -29,10 +30,9 @@ fun AppLauncherNavigation() {
         )
 
         signInScreen(
-            onSignInSuccess = { className ->
+            onSignInSuccess = {
                 keyLogin = true
-                val intent = Intent(context, Class.forName(className))
-                context.startActivity(intent)
+                moveToMainActivity(context)
             },
             onSignInFailure = { error ->
                 showErrorDialog = error

@@ -1,7 +1,6 @@
 package com.casecode.feature.account
 
 import android.app.Activity
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,13 +38,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.casecode.core.common.result.Result
+import com.casecode.core.common.utils.moveToAppLauncherActivity
 import com.casecode.core.data.model.User
 import com.casecode.core.data.model.toUser
 import com.casecode.core.designsystem.component.dialog.ConfirmationDialog
 import com.casecode.core.designsystem.component.dialog.ErrorDialog
 import com.casecode.core.designsystem.component.dialog.LoadingDialog
 import com.casecode.core.designsystem.icon.GeoAlertIcons
-import timber.log.Timber
 import com.casecode.core.designsystem.R as designSystemR
 
 @Composable
@@ -104,12 +103,9 @@ internal fun AccountRoute(viewModel: AccountViewModel = hiltViewModel()) {
         when (deleteUserResult) {
             is Result.Success -> {
                 showConfirmDialog = false
-                val intent = Intent(
-                    context,
-                    Class.forName(ClassNames.APP_LAUNCHER_ACTIVITY.className)
-                )
-                context.startActivity(intent)
-                viewModel.resetDeleteUserResult() // Reset the delete user result
+                moveToAppLauncherActivity(context)
+                // Reset the delete user result
+                viewModel.resetDeleteUserResult()
             }
 
             is Result.Error -> {
@@ -128,11 +124,7 @@ internal fun AccountRoute(viewModel: AccountViewModel = hiltViewModel()) {
         when (signOutResult) {
             is Result.Success -> {
                 showConfirmDialog = false
-                val intent = Intent(
-                    context,
-                    Class.forName(ClassNames.APP_LAUNCHER_ACTIVITY.className)
-                )
-                context.startActivity(intent)
+                moveToAppLauncherActivity(context)
                 viewModel.resetSignOutResult() // Reset the sign out result
             }
 
@@ -248,11 +240,4 @@ fun AccountScreenPreview() {
         onDeleteAccount = {},
         onSignOut = {}
     )
-}
-
-enum class ClassNames(val className: String) {
-    APP_LAUNCHER_ACTIVITY("com.casecode.feature.launcher.presentation.AppLauncherActivity"),
-
-    //    MAIN_ACTIVITY("com.casecode.feature.main.presentation.MainActivity"),
-    MAIN_ACTIVITY("com.casecode.geoalert.ui.MainActivity"),
 }
