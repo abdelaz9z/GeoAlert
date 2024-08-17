@@ -49,7 +49,7 @@ class AccountViewModel @Inject constructor(
 
     fun deleteUser(activity: Activity) {
         viewModelScope.launch {
-            deleteUserUseCase.deleteUserFromDatabase().collect { databaseResult ->
+            deleteUserUseCase.deleteUser().collect { databaseResult ->
                 handleDeleteResult(databaseResult, activity)
             }
         }

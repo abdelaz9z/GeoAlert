@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in_success">مرحبًا بعودتك! لقد تم تسجيل الدخول بنجاح.</string>
+    <string name="sign_in_failure">فشل في تسجيل الدخول. يرجى التحقق من التفاصيل والمحاولة مرة أخرى.</string>
+    <string name="sign_in_exception">حدث خطأ أثناء تسجيل الدخول. يرجى المحاولة مرة أخرى لاحقًا.</string>
+    <string name="unsupported_api_call">طريقة تسجيل الدخول هذه غير مدعومة. يرجى استخدام طريقة أخرى.</string>
+    <string name="sign_in_api_exception">حدثت مشكلة في خدمة تسجيل الدخول. يرجى المحاولة مرة أخرى لاحقًا.</string>
+    <string name="sign_in_success_new_user">مرحبًا! لقد تم إنشاء حسابك بنجاح.</string>
+    <string name="invalid_credentials">بيانات الاعتماد المقدمة غير صحيحة. يرجى التحقق والمحاولة مرة أخرى.</string>
+</resources>

@@ -30,8 +30,9 @@ object RepositoryModule {
     fun provideUserRepository(
         usersRef: DatabaseReference,
         firebaseAuth: FirebaseAuth,
+        @Dispatcher(IO) ioDispatcher: CoroutineDispatcher
     ): UserRepository {
-        return UserRepositoryImpl(usersRef, firebaseAuth)
+        return UserRepositoryImpl(usersRef, firebaseAuth, ioDispatcher)
     }
 
     @Provides
@@ -48,12 +49,14 @@ object RepositoryModule {
         @ApplicationContext context: Context,
         firebaseAuth: FirebaseAuth,
         googleIdOption: GetGoogleIdOption,
+        userRepository: UserRepository,
         @Dispatcher(IO) ioDispatcher: CoroutineDispatcher,
     ): AuthService {
         return AuthServiceImpl(
             context,
             firebaseAuth,
             googleIdOption,
+            userRepository,
             ioDispatcher
         )
     }

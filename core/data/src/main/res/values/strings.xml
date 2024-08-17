@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="sign_in_success">Sign in success</string>
-    <string name="sign_in_failure">Sign_in failure</string>
-    <string name="sign_in_exception">Sign in exception</string>
-    <string name="unsupported_api_call">Unsupported api call</string>
-    <string name="sign_in_api_exception">Sign in api exception</string>
+    <string name="sign_in_success">Welcome back! You\'ve signed in successfully.</string>
+    <string name="sign_in_failure">Sign in failed. Please check your details and try again.</string>
+    <string name="sign_in_exception">An error occurred during sign-in. Please try again later.</string>
+    <string name="unsupported_api_call">This sign-in method is not supported. Please use a different method.</string>
+    <string name="sign_in_api_exception">There was a problem with the sign-in service. Please try again later.</string>
+    <string name="sign_in_success_new_user">Welcome! Your account has been created successfully.</string>
+    <string name="invalid_credentials">The credentials provided are invalid. Please verify and try again.</string>
 </resources>

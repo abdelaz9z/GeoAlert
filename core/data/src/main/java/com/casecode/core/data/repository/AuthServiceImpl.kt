@@ -11,6 +11,7 @@ import com.casecode.core.common.network.GeoAlertDispatchersDispatchers.IO
 import com.casecode.core.common.result.Resource
 import com.casecode.core.common.result.Result
 import com.casecode.core.data.R
+import com.casecode.core.data.model.toUser
 import com.google.android.gms.common.api.UnsupportedApiCallException
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -35,11 +36,11 @@ import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
-
 class AuthServiceImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val firebaseAuth: FirebaseAuth,
     private val googleIdOption: GetGoogleIdOption,
+    private val userRepository: UserRepository,
     @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher
 ) : AuthService {
 
@@ -59,31 +60,35 @@ class AuthServiceImpl @Inject constructor(
         get() = firebaseAuth.currentUser?.uid?.isNotBlank() == true
 
     override suspend fun signIn(activity: Activity): Resource<Int> {
-        trace(SIGN_IN) {
-            return withContext(ioDispatcher) {
+        return trace(SIGN_IN) {
+            withContext(ioDispatcher) {
                 try {
                     val googleIdToken = retrieveGoogleIdToken(activity)
                     val googleCredentials = buildGoogleAuthCredential(googleIdToken)
                     val authResult = signInWithGoogleCredentials(googleCredentials)
 
-                    if (authResult.user != null) {
-                        Resource.success(R.string.sign_in_success)
-                    } else {
-                        Resource.empty(null, R.string.sign_in_failure)
-                    }
+                    authResult.user?.let { user ->
+                        val isNewUser = authResult.additionalUserInfo?.isNewUser == true
+                        if (isNewUser) {
+                            val userData = user.toUser()
+                            when (userRepository.addUser(userData)) {
+                                is Result.Success -> Resource.success(R.string.sign_in_success_new_user)
+                                is Result.Error -> Resource.error(R.string.sign_in_failure)
+                                else -> Resource.error(R.string.sign_in_failure)
+                            }
+                        } else {
+                            Resource.success(R.string.sign_in_success)
+                        }
+                    } ?: Resource.empty(null, R.string.sign_in_failure)
                 } catch (e: GetCredentialException) {
-                    Timber.e("Sign-in failed with GetCredentialException: ${e.message}")
                     Resource.error(R.string.sign_in_exception)
                 } catch (e: UnsupportedApiCallException) {
-                    Timber.e("Sign-in failed with UnsupportedApiCallException: ${e.message}")
                     Resource.error(R.string.unsupported_api_call)
                 } catch (e: FirebaseAuthInvalidCredentialsException) {
-                    Resource.error(e.message)
+                    Resource.error(R.string.invalid_credentials)
                 } catch (e: FirebaseAuthException) {
-                    Timber.e("Sign-in failed with FirebaseAuthException: ${e.message}")
                     Resource.error(R.string.sign_in_api_exception)
                 } catch (e: Exception) {
-                    Timber.e("Sign-in failed with exception: ${e.message}")
                     Resource.error(R.string.sign_in_failure)
                 }
             }
